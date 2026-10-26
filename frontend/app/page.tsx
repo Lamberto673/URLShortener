@@ -15,12 +15,15 @@ export default function app() {
       <span className="flex flex-col items-center bg-transparent sticky z-50 top-0">
         <Navbar />
       </span>
-      <section className="bg-blue-50 flex flex-col justify-center  items-center  min-h-screen">
-        <div className="w-full h-44">
+
+      {/* Hero */}
+      <section className="bg-blue-50 flex flex-col justify-start  items-end  h-100 mt-40">
+        <div className="w-full h-40">
           <TechText
+            fontFamily="anime"
             text="Welcome to"
             fontWeight={600}
-            fontSize={150}
+            fontSize={100}
             reveal="letter"
             dashLength={4}
             dashGap={2}
@@ -29,7 +32,6 @@ export default function app() {
             introDuration={2}
             clickKick
             guides={false}
-            fontFamily=""
             letterSpacing={-0.05}
             accentColor="currentColor"
             reach={200}
@@ -50,7 +52,7 @@ export default function app() {
           <TechText
             text="URL Shortener"
             fontWeight={600}
-            fontSize={100}
+            fontSize={80}
             reveal="letter"
             dashLength={4}
             dashGap={2}
@@ -59,7 +61,7 @@ export default function app() {
             introDuration={2}
             clickKick
             guides={false}
-            fontFamily=""
+            fontFamily="anime"
             letterSpacing={-0.05}
             accentColor="currentColor"
             reach={50}
@@ -77,8 +79,21 @@ export default function app() {
           />
         </div>
       </section>
+      <section className="bg-blue-50 flex flex-col justify-center  items-center mb-50">
+        <div className="flex flex-col justify-center items-center w-150 h-30 bg-blue-300 rounded-2xl">
+          <a
+            href="#inserts"
+            className="font-bold w-148 h-28 bg-amber-50 rounded-2xl font-smooth text-5xl text-center flex justify-center items-center scroll-smooth"
+          >
+            Go Try the Shortener
+          </a>
+        </div>
+      </section>
       <div className="w-full h-20 bg-blue-950 shadow-2xl" />
-      <section className="bg-blue-50 flex flex-col justify-center  items-center  min-h-screen">
+      <section
+        id="inserts"
+        className="bg-blue-50 flex flex-col justify-center  items-center  min-h-screen"
+      >
         <div className="midd-view flex-1  rounded-lg  ">
           <form className="h-50 w-200 bg-blue-700 opacity-50 rounded-lg shadow-2xl flex flex-col justify-center items-center">
             <input id="url" className="w-100 h-10 p-2 text-black  bg-white " />

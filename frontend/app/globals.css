@@ -2,6 +2,9 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+html {
+  scroll-behavior: smooth;
+}
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -46,6 +49,8 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --font-smooth: "Smooth", sans-serif;
+  --font-safe: "anime", sans-serif;
 }
 
 @utility midd-view {
@@ -60,7 +65,17 @@
   background-position: center; /* Centers the image so cropping happens equally on edges */
   background-repeat: no-repeat;
 }
+@font-face {
+  font-family: "Smooth";
+  src: url("/fonts/Smooth-Regular.ttf") format("truetype");
 
+  font-display: swap;
+}
+@font-face {
+  font-family: "anime";
+  src: url("/fonts/anime.otf") format("opentype");
+  font-display: swap;
+}
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
