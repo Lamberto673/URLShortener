@@ -99,6 +99,7 @@ export default async function app() {
         <div className="midd-view flex-1  rounded-lg  ">
           <form className="h-50 w-200 bg-blue-700 opacity-50 rounded-lg shadow-2xl flex flex-col justify-center items-center">
             <input
+            name="name"
               id="url"
               placeholder="https://google.com"
               className="w-120 h-12 p-2 text-lg text-black  bg-white "

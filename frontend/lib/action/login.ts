@@ -9,6 +9,7 @@ type Credentials = {
   username: string;
   password: string;
   reTypePassword?: string;
+  image_url?: string | "/images/default_avatar.png";
 };
 type AuthResult = {
   username: string;
@@ -36,6 +37,7 @@ export async function register({
   if (reTypePassword != password) {
     throw new Error("Password's not the same");
   }
+
   const params = new URLSearchParams({ username, password });
 
   const res = await fetch(`http://localhost:8081/register?${params}`, {

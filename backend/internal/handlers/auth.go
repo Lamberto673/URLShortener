@@ -17,6 +17,7 @@ import (
 type tokenResponse struct {
 	Username string `json:"username"`
 	Token string `json:"token"`
+	Image_url string `json:"image_url"`
 }
 
 func hashPassword(password string ) string {
@@ -33,7 +34,7 @@ func Register (db tools.DatabaseInterface) http.HandlerFunc{
 	return func(w http.ResponseWriter, r *http.Request) {
 			username := r.URL.Query().Get("username")
 			password := r.URL.Query().Get("password")
-
+			image := r.URL.Query().Get("image_url")
 			if username == "" || password == "" {
 				api.RequestErrorHandler(w, errors.New("username and password are required"))
 				return
@@ -54,7 +55,7 @@ func Register (db tools.DatabaseInterface) http.HandlerFunc{
 			}
 			w.Header().Set("Content-Type","application/json")
 			w.WriteHeader(http.StatusCreated)
-			json.NewEncoder(w).Encode(tokenResponse{Username: username, Token:token})
+			json.NewEncoder(w).Encode(tokenResponse{Username: username, Token:token, Image_url: image})
 			
 	}
 }

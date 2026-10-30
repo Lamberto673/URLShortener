@@ -10,13 +10,14 @@ export async function Navbar() {
   return (
     <nav className="h-15 bg-blue-900 w-200 rounded-lg mt-5 shadow-lg  ">
       <ul className="flex items-center justify-between h-full px-20 overflow-hidden text-white">
-        {userId ? (
+        {username ? (
           <span className="cursor-pointer hover:translate-y-1 ease-in-out duration-200 transition-all">
             <Image
-              src={session.user?.image ?? "/images/default_avatar.png"}
-              alt={session.user?.name ?? "user"}
-              width={20}
-              height={20}
+              src={"/images/default_avatar.png"}
+              alt={"user"}
+              width={65}
+              height={65}
+              className="z-50"
             />
           </span>
         ) : (
