@@ -1,10 +1,12 @@
 import Image from "next/image";
 import { Navbar } from "./components/Navbar";
 import TechText from "../components/TechText";
-export default function app() {
+export default async function app() {
+
+  
   return (
     <div className=" min-h-screen  bg-blue-50 w-full  flex flex-col">
-      <nav className="w-full bg-blue-900 h-20 flex justify-center items-center gap-5">
+      <nav className="w-full bg-blue-900 h-20 flex justify-center items-center gap-5 shadow-lg">
         <ul className="text-amber-200 font-sans font-bold text-2xl">
           Url Shortener
         </ul>
@@ -96,7 +98,11 @@ export default function app() {
       >
         <div className="midd-view flex-1  rounded-lg  ">
           <form className="h-50 w-200 bg-blue-700 opacity-50 rounded-lg shadow-2xl flex flex-col justify-center items-center">
-            <input id="url" className="w-100 h-10 p-2 text-black  bg-white " />
+            <input
+              id="url"
+              placeholder="https://google.com"
+              className="w-120 h-12 p-2 text-lg text-black  bg-white "
+            />
           </form>
         </div>
       </section>
