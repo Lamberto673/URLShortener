@@ -1,9 +1,23 @@
 import Image from "next/image";
-import { Navbar } from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import TechText from "../components/TechText";
-export default async function app() {
+import { cookies } from "next/headers";
+import InputURL from "./components/InputURL";
+import { Suspense } from "react";
+import { redirect } from "next/navigation";
 
-  
+async function ShortenerSection() {
+  const store = (await cookies()).get("token")?.value;
+  if (!store) redirect("/login");
+  return <InputURL tokens={store} />;
+}
+async function NavbarSection() {
+  const store = await cookies();
+  const username = store.get("username")?.value;
+  if (!store) redirect("/login");
+  return <Navbar username={username} />;
+}
+export default function app() {
   return (
     <div className=" min-h-screen  bg-blue-50 w-full  flex flex-col">
       <nav className="w-full bg-blue-900 h-20 flex justify-center items-center gap-5 shadow-lg">
@@ -15,7 +29,7 @@ export default async function app() {
         </ul>
       </nav>
       <span className="flex flex-col items-center bg-transparent sticky z-50 top-0">
-        <Navbar />
+        <NavbarSection />
       </span>
 
       {/* Hero */}
@@ -82,7 +96,7 @@ export default async function app() {
         </div>
       </section>
       <section className="bg-blue-50 flex flex-col justify-center  items-center mb-50">
-        <div className="flex flex-col justify-center items-center w-150 h-30 bg-blue-300 rounded-2xl">
+        <div className="flex flex-col justify-center items-center w-150 h-30 bg-blue-300 rounded-2xl hover:translate-y-1 transition-all ease-in-out duration-150">
           <a
             href="#inserts"
             className="font-bold w-148 h-28 bg-amber-50 rounded-2xl font-smooth text-5xl text-center flex justify-center items-center scroll-smooth"
@@ -96,16 +110,9 @@ export default async function app() {
         id="inserts"
         className="bg-blue-50 flex flex-col justify-center  items-center  min-h-screen"
       >
-        <div className="midd-view flex-1  rounded-lg  ">
-          <form className="h-50 w-200 bg-blue-700 opacity-50 rounded-lg shadow-2xl flex flex-col justify-center items-center">
-            <input
-            name="name"
-              id="url"
-              placeholder="https://google.com"
-              className="w-120 h-12 p-2 text-lg text-black  bg-white "
-            />
-          </form>
-        </div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <ShortenerSection />
+        </Suspense>
       </section>
       <div className="w-full h-20 bg-blue-950 shadow-2xl" />
 
