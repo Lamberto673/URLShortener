@@ -1,45 +1,60 @@
 import React from "react";
-import { register, registerAction } from "../../lib/action/login";
+import { registerAction } from "../../lib/action/login";
+import SubmitButton from "./SubmitButton";
+
+const field =
+  "h-14 w-full rounded-lg border border-blue-300 bg-white px-4 text-lg text-blue-950 placeholder:text-blue-900/80";
+const label = "mb-2 block font-semibold text-blue-950";
 
 const Registered = () => {
   return (
-    <div className="midd-view flex-1  rounded-lg  h-full">
-      <form
-        className="h-100 w-200 bg-blue-700 opacity-50 rounded-lg shadow-2xl flex flex-col justify-center items-center gap-5 p-1 px-20"
-        action={registerAction}
-      >
-        <span className="w-full flex justify-between gap-3.5  items-center">
-          <h1 className="text-black font-bold text-xl">Username: </h1>
-          <input
-            name="name"
-            id="url"
-            placeholder="Alex"
-            className="w-120 h-12 p-2 text-lg text-black  bg-white rounded-lg"
-          />
-        </span>
-        <span className="flex justify-between w-full gap-3.5  items-center">
-          <h1 className="text-black font-bold text-xl">Password: </h1>
-          <input
-            name="password"
-            id="url"
-            placeholder="Alex123"
-            className="w-120 h-12 p-2 text-lg text-black  bg-white rounded-lg"
-          />
-        </span>
-        <span className="flex justify-between w-full gap-3.5  items-center">
-          <h1 className="text-black font-bold text-xl">Re-enter Password: </h1>
-          <input
-            name="reTypePassword"
-            id="url"
-            placeholder="Alex123"
-            className="w-120 h-12 p-2 text-lg text-black  bg-white rounded-lg"
-          />
-        </span>
-        <button className="w-50 h-15 rounded-lg bg-gray-900 text-black font-bold shadow-lg cursor-pointer hover:-translate-y-0.5 active:translate-y-0.5 transition-all ease-in-out duration-200">
-          Login
-        </button>
-      </form>
-    </div>
+    <form
+      className="flex w-full max-w-lg flex-col gap-5 rounded-lg bg-blue-50 p-6 shadow-[0_24px_48px_-16px_rgb(0_0_0/0.6)] sm:p-10"
+      action={registerAction}
+    >
+      <div>
+        <label htmlFor="name" className={label}>
+          Username:
+        </label>
+        <input
+          name="name"
+          id="name"
+          required
+          autoComplete="username"
+          placeholder="Alex"
+          className={field}
+        />
+      </div>
+      <div>
+        <label htmlFor="password" className={label}>
+          Password:
+        </label>
+        <input
+          name="password"
+          id="password"
+          type="password"
+          required
+          autoComplete="new-password"
+          placeholder="Alex123"
+          className={field}
+        />
+      </div>
+      <div>
+        <label htmlFor="reTypePassword" className={label}>
+          Re-enter Password:
+        </label>
+        <input
+          name="reTypePassword"
+          id="reTypePassword"
+          type="password"
+          required
+          autoComplete="new-password"
+          placeholder="Alex123"
+          className={field}
+        />
+      </div>
+      <SubmitButton label="Login" pendingLabel="Logging in..." className="mt-2" />
+    </form>
   );
 };
 

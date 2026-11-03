@@ -3,57 +3,67 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function Navbar({ username }: { username: string }) {
+const RollText = ({ text }: { text: string }) => (
+  <span className="relative block h-6 overflow-hidden">
+    <span className="block transition-transform duration-300 ease-out group-hover:-translate-y-full">
+      {text}
+    </span>
+    <span
+      aria-hidden
+      className="absolute inset-x-0 top-full block transition-transform duration-300 ease-out group-hover:-translate-y-full"
+    >
+      {text}
+    </span>
+  </span>
+);
+
+export default function Navbar({ username }: { username?: string }) {
   const [open, setOpen] = useState(false);
+  const cell =
+    "group flex h-full flex-1 cursor-pointer items-center justify-center";
 
   return (
-    <div className="flex flex-col transition-all ">
-      <nav className="h-15 bg-blue-900 w-200 rounded-lg mt-5 shadow-lg  z-100">
-        <ul className="flex items-center justify-between h-full px-20 overflow-hidden text-white">
-          {username ? (
-            <button
-              onClick={() => setOpen(!open)}
-              className="cursor-pointer hover:translate-y-1 ease-in-out duration-200 transition-all"
-            >
-              <Image
-                src={"/images/default_avatar.png"}
-                alt={"user"}
-                width={65}
-                height={65}
-                className="z-50"
-              />
-            </button>
-          ) : (
-            <Link
-              href={"/login"}
-              className="hover:-translate-y-10 ease-in-out transition-all duration-200 cursor-pointer"
-            >
-              Login
-              <p className="">Login</p>
-              <p className="mt-4">Login</p>
-              <p className="mt-4 mb-6">Login</p>
-            </Link>
-          )}
-
-          <li className="hover:-translate-y-10 ease-in-out transition-all duration-200 cursor-pointer">
-            Analytics
-            <p className="">Analytics</p>
-            <p className="mt-4">Analytics</p>
-            <p className="mt-4 mb-6">Analytics</p>
+    <div className="relative w-full max-w-200">
+      <nav className="relative z-10 h-15 overflow-hidden rounded-lg border border-white/15 bg-blue-900 shadow-[0_12px_24px_-12px_rgb(23_37_84/0.7)]">
+        <ul className="flex h-full divide-x divide-white/15 text-center font-medium text-white">
+          <li className="flex-1">
+            {username ? (
+              <button
+                onClick={() => setOpen(!open)}
+                aria-expanded={open}
+                aria-label={`Account: ${username}`}
+                className={`${cell} w-full`}
+              >
+                <Image
+                  src={"/images/default_avatar.png"}
+                  alt=""
+                  width={52}
+                  height={52}
+                  className="transition-transform duration-200 ease-out group-hover:translate-y-0.5"
+                />
+              </button>
+            ) : (
+              <Link href={"/login"} className={cell}>
+                <RollText text="Login" />
+              </Link>
+            )}
           </li>
-          <li className="hover:-translate-y-10 ease-in-out transition-all duration-200 cursor-pointer">
-            Menu <p className="">Menu</p>
-            <p className="mt-4">Menu</p>
-            <p className="mt-4 mb-6">Menu</p>
+          <li className={cell}>
+            <RollText text="Analytics" />
+          </li>
+          <li className={cell}>
+            <RollText text="Menu" />
           </li>
         </ul>
       </nav>
 
-      <div
-        className={`mr-2 rounded-b-2xl bg-white shadow-lg w-20 h-10 justify-center text-center flex items-center transition-all -translate-y-10 z-50 ${open ? "translate-y-0.5" : ""}`}
-      >
-        <p>{username}</p>
-      </div>
+      {username && (
+        <div
+          className={`absolute left-2 top-full w-[calc(33.333%-1rem)] rounded-b-lg bg-white px-3 py-2 text-center text-blue-950 shadow-[0_12px_24px_-12px_rgb(23_37_84/0.7)] transition-all duration-200 ease-out ${open ? "translate-y-0" : "invisible -translate-y-full"}`}
+        >
+          <p className="truncate">{username}</p>
+        </div>
+      )}
     </div>
   );
 }

@@ -10,7 +10,7 @@ html {
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -60,7 +60,7 @@ html {
   align-items: center;
 }
 @utility noise {
-  background-image: url("/images/navy.png");
+  background-image: url("/images/navy-grain.webp");
   background-size: cover; /* Scales image to fill container without distortion */
   background-position: center; /* Centers the image so cropping happens equally on edges */
   background-repeat: no-repeat;
@@ -154,5 +154,42 @@ html {
   }
   html {
     @apply font-sans;
+    scrollbar-color: var(--color-blue-800) var(--color-blue-50);
+  }
+  ::selection {
+    background: var(--color-amber-400);
+    color: var(--color-blue-950);
+  }
+  input {
+    caret-color: var(--color-blue-700);
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-amber-400);
+    outline-offset: 2px;
+  }
+}
+
+@keyframes step-shorten {
+  from {
+    width: 100%;
+  }
+}
+.step-shorten {
+  animation: step-shorten 900ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+/* Decoration only: GSAP reveals these so they never flash in before their entrance. */
+.hero-block {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .step-shorten {
+    animation: none;
+  }
+  .hero-block {
+    visibility: visible;
   }
 }
