@@ -21,8 +21,8 @@ async function NavbarSection() {
 }
 export default function app() {
   return (
-    <PageMotion className="min-h-screen bg-blue-50 w-full flex flex-col">
-      <div className="w-full bg-blue-950 h-14 flex justify-center items-stretch divide-x divide-white/15 border-b border-white/15 font-bold sm:text-lg">
+    <PageMotion className="min-h-screen bg-blue-50  flex flex-col">
+      <div className=" bg-blue-950 h-14 flex justify-center items-stretch divide-x divide-white/15 border-b border-white/15 font-bold sm:text-lg">
         <p className="flex items-center px-4 sm:px-8 text-amber-200">
           Url Shortener
         </p>

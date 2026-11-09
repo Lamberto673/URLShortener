@@ -23,6 +23,7 @@ type DatabaseInterface interface {
 	GetUserByToken(token string) *LoginDetails
 	GetURL(code string) (string, error) 
 	SetURL(code string, original string , userID string) error
+	DeleteUser(token string, newToken string) error
 	SetupDatabase() error
 } 
 
@@ -101,4 +102,13 @@ func (p *PostgresDB) GetUserLoginDetails(username string, pass_hash string) *Log
 	}
 
 	return &LoginDetails{Username: username, AuthToken: token}
+}
+func (p *PostgresDB) DeleteUser(token string, newToken string) error {
+	sqlStr, args, err := psql.Update("users").Set("auth_token", newToken).Where(sq.Eq{"auth_token": token}).ToSql()
+
+	if err != nil {
+		return nil
+	}
+	_, err = p.pool.Exec(context.Background(), sqlStr,args...)
+	return err
 }

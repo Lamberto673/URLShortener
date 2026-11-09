@@ -74,3 +74,17 @@ func Login(db tools.DatabaseInterface) http.HandlerFunc {
 		json.NewEncoder(w).Encode(tokenResponse{Username:details.Username, Token: details.AuthToken})
 	})		
 }
+
+func Logout(db tools.DatabaseInterface) http.HandlerFunc {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		token := r.URL.Query().Get("auth_token")
+		err := db.DeleteUser(token, newToken())
+
+		if err != nil {
+			api.InternalErrorHandler(w)
+			return 
+		}
+		
+		w.WriteHeader(http.StatusNoContent)
+	})	
+}

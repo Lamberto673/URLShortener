@@ -13,6 +13,7 @@ func Handler(r *chi.Mux, db tools.DatabaseInterface) {
 	r.Post("/register", Register(db))
 	r.Post("/login", Login(db))
 	r.Get("/{code}", RedirectURLs(db))
+	r.Post("/Logout", Logout(db))
 
 	r.Route("/user", func(route chi.Router) {
 		route.Use(middleware.Authorization(db))
