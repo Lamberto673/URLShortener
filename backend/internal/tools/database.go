@@ -25,6 +25,7 @@ type DatabaseInterface interface {
 	SetURL(code string, original string , userID string) error
 	DeleteUser(token string, newToken string) error
 	SetupDatabase() error
+	ClickCount(originalURL string) error
 } 
 
 func NewDatabase(ctx context.Context, connStr string) (DatabaseInterface, error) {
@@ -111,4 +112,19 @@ func (p *PostgresDB) DeleteUser(token string, newToken string) error {
 	}
 	_, err = p.pool.Exec(context.Background(), sqlStr,args...)
 	return err
+}
+func (p* PostgresDB) ClickCount(originalURL string) error {
+	sqlStr, args, err := 
+	psql.Update("urls").
+	Set("click_count", sq.Expr("click_count + 1")).
+	Where(sq.Eq{"long_url": originalURL}).
+	ToSql()
+
+	if err != nil {
+		return nil
+	}
+
+	_, err = p.pool.Exec(context.Background(), sqlStr, args...)
+	return err
+
 }

@@ -38,7 +38,7 @@ func GetURLShortener(db tools.DatabaseInterface) http.HandlerFunc {
 
 
 		originalURL := params.Original
-		urlsShorten := fmt.Sprintf(`https://localhost:8081/%s`, encoded)
+		urlsShorten := fmt.Sprintf(`http://localhost:8081/%s`, encoded)
 		token := r.Header.Get("Authorization")
 		
 	
@@ -75,6 +75,7 @@ func RedirectURLs(db tools.DatabaseInterface) http.HandlerFunc {
 				api.InternalErrorHandler(w)
 				return
 			}
+			db.ClickCount(originalURL)
 			http.Redirect(w, r, originalURL, http.StatusFound);
 		}
 }
